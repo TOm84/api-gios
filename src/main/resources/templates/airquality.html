@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:w="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Air Quality</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row mt-2">
+        <div class="col-12">
+            <nav th:replace="navibar :: navib"></nav>
+        </div>
+    </div>
+    <form class="form-inline my-2 my-lg-0">
+        <br>
+        <form th:action="${'airquality'}" method="get">
+            <label>Enter id station:</label>
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Enter id" name="idstat">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Air quality in station</button>
+        </form>
+    </form>
+
+    <form th:action="${'airquality'}" method="get">
+        <label th:field="coin1">Chosing station by name: </label>
+        <select id="list" name="list">
+            <option value="">Station list</option>
+            <option th:each="gs : ${stationNameList.keySet()}" th:value="${stationNameList.get(gs)}" th:text="${gs}"/>
+        </select>
+        <button type="submit" class="btn btn-outline-dark btn-sm">Szukaj</button>
+    </form>
+
+    <div id="search2" th:action="${'/airquality'}">
+        <table class="table-sm table-bordered table-striped table-responsive-sm w-100" th:each="c : ${takestation}">
+            <tbody>
+            <tr>
+                <td>Id station:</td>
+                <td th:text="${c.getStationId()}"></td>
+                <td text>stCalcDate: </td>
+                <td th:text="${c.getStCalcDate()}"></td>
+            </tr>
+            <tr>
+                <td th:text="'idIndexLevelName: ' + ${c.getIdIndexLevelName()}"></td>
+                <td th:text="'stIndexLevelName: ' + ${c.getStIndexLevelName()}"></td>
+                <td text>stSourceDataDate: </td>
+                <td th:text="${c.getStSourceDataDate()}"></td>
+            </tr>
+            <tr>
+                <td text>stIndexStatus:</td>
+                <td th:text="${c.getStIndexStatus()}"></td>
+                <td text>stIndexCrParam:</td>
+                <td th:text="${c.getStIndexCrParam()}"></td>
+            </tr>
+            <tr th:each="d : ${c.getIndeksModels()}">
+                <td th:text="${d.getName()}"></td>
+                    <td th:text="'getCalcDate: ' + ${d.getCalcDate()}"></td>
+                    <td th:text="'id: ' + ${d.getId()}"></td>
+                    <td th:text="'indexLevelName: ' + ${d.getIndexLevelName()}"></td>
+                    <td th:text="'sourceDataDate: ' + ${d.getSourceDataDate()}"></td>
+
+            </tr>
+            <tr><br></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <p><b>EN: Translation of markings / PL: Tłumaczenie oznaczeń</b></p>
+            <p><b>stCalcDate</b> - date of the index calculation / data wykonania obliczeń indeksu</p>
+            <p><b>idIndexLevelName</b> - index value for stations expressed as number (numbers 1 to 5) /wartość indeksu dla stacji wyrażona w postaci liczby od 1 do 5</p>
+            <p><b>stIndexLevelName</b> - the word index value for the station /  słowna wartość indeksu dla stacji</p>
+            <p><b>stSourceDataDate</b> - date of the source data from which the index value was calculated / data danych źródłowych, z których policzono wartość indeksu</p>
+            <p><b>stIndexStatus</b> - date of the source data from which the index value was calculated. It can take the value "true" (valid index) or "false" (invalid index / no index).  / Status indeksu ogólnego dla stacji pomiarowej. Może przyjmować wartość „true” (indeks ważny) lub „false” (indeks nieważny/ brak indeksu)</p>
+            <p><b>stIndexCrParam</b> - Code of the critical pollution (with a lower value) for the voivodeship where the measuring station is located. It can accept the following entries: "pyl" if at a given hour the critical pollutant in a given voivodeship is dust: PM10 and PM2.5 in total (usually in winter), or "ozon" if the critical pollutant is ozone (usually in summer). If the worst pollutant in a given voivodeship at a given hour is some other parameter, e.g. SO2 - Very bad, then the index for a given station takes the value for this pollutant, but the general index in the voivodeship still refers to the worst of the critical pollutants: pyl or ozon /Kod zanieczyszczenia krytycznego (o gorszej wartości) dla województwa, w którym zlokalizowana jest stacja pomiarowa. Może przyjmować wpisy: „pyl” jeśli w danej godzinie zanieczyszczeniem krytycznym w danym województwie jest pył: łącznie PM10 i PM2,5 (zwykle zimą), lub „ozon” jeśli zanieczyszczeniem krytycznym jest ozon (zwykle latem). Jeśli najgorszym zanieczyszczeniem w danym województwie w danej godzinie jest jakiś inny parametr, np. SO2 – Bardzo zły, wówczas indeks dla danej stacji przyjmuje wartość dla tego zanieczyszczenia, jednak ogólny indeks w województwie nadal odnosi się do najgorszego z zanieczyszczeń krytycznych: pył lub ozon</p>
+            <p></p>
+            <p><b>getCalcDate - The date on which the index calculation for the indicator was performed / Data wykonania obliczeń indeksu dla wskaźnika</b></p>
+            <p><b>id</b> - Index value for the indicator (index ranges from 0 to 5) / Wartość indeksu dla wskaźnika (zakresy indeksu o id od  0 do 5)</p>
+            <p><b>indexLevelName</b> - the word name of the index category / nazwa słowna kategorii indeksu</p>
+            <p><b>sourceDataDate</b> - Date of the source data from which the index value for the indicator was calculated /Data danych źródłowych, z których policzono wartość indeksu dla wskaźnika SO2</p>
+            <p></p>
+            <p>More about GIOS Api on the webpage: </p> <a href="https://powietrze.gios.gov.pl/pjp/content/api">https://powietrze.gios.gov.pl/pjp/content/api</a>
+        </div>
+    </div>
+
+</div>
+
+
+
+</body>
+</html>

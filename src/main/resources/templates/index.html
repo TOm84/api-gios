@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:w="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+</head>
+<body>
+<div class="container-fluid">
+    <nav th:replace="navibar :: navib"></nav>
+</div>
+
+<!--<div>-->
+<!--    <ul th:each=" c: ${response}">-->
+<!--        <li th:text="${c.getStationId()}"></li>-->
+<!--        <li th:text="${c}"></li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--    <ul th:each=" c: ${allstation}">-->
+<!--        <li th:text="${c}"></li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--    <ul th:each=" c: ${alibaba}">-->
+<!--        <li th:text="${c}"></li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--    <ul th:each=" c: ${test}">-->
+<!--        <li th:text="${c}"></li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<div>
+    <ul th:each=" c: ${hashList}">
+        <li th:text="${c}"></li>
+    </ul>
+</div>
+
+</body>
+</html>

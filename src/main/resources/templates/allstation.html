@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All station page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row mt-2">
+        <div class="col-12">
+            <nav th:replace="navibar :: navib"></nav>
+        </div>
+    </div>
+    <div id="search2" th:action="${'/allstation'}">
+        <table class="table-sm table-bordered table-striped table-responsive-sm w-100" th:each="c : ${allstat}">
+            <tbody>
+            <tr>
+                <td text="aaaa">Id station:</td>
+                <td th:text="${c.getStationId()}"></td>
+                <td text>Name station: </td>
+                <td th:text="${c.getStationName()}"></td>
+                <td text> Geogr. latitude</td>
+                <td th:text="${c.getGegrLat()}"></td>
+                <td text>Geogr. longitude</td>
+                <td th:text="${c.getGegrLon()}"></td>
+                <td>
+                    <button>
+                        Station on the map
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td text>Id city: </td>
+                <td th:text="${c.getCityId()}"></td>
+                <td text>city name:</td>
+                <td th:text="${c.getCityName()}"></td>
+                <td text>Comune name:</td>
+                <td th:text="${c.getCommuneName()}"></td>
+                <td text>Distric name:</td>
+                <td th:text="${c.getDistrictName()}"></td>
+                <td text>Province Name:</td>
+                <td th:text="${c.getProvinceName()}"></td>
+            </tr>
+            <tr>
+                <td text colspan="1">Adress station:</td>
+                <td colspan="5" th:text="${c.getAddressStreetStation()}"></td>
+                <td>
+                    <div>
+                        <input hidden name="idStation" th:value="${c.getStationId()}">
+                        <button type="button" class="btn btn-success open-button btn-sm pt-0 pb-0" data-toggle="modal" data-target="#infoModal2" th:value="${c.getStationId()}" th:attrappend="data-target=${c.getStationId()}">
+                            Air Quality
+                        </button>
+
+                        <div class="modal fade" id="infoModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" th:attrappend="id=${c.getStationId()}">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel" th:text="'Air quality on: ' + ${c.getStationName()}"></h5>
+                                        <h5 class="modal-title"  th:name="idStation" th:text="${c.getStationId()}"></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <table table class="table-sm table-bordered table-striped table-responsive-sm w-100" th:each="d : ${qualitystation}">
+                                            <tr>
+                                                <td th:text="'Id station: ' + ${d.getStationId()}"></td>
+                                                <td th:text="'stCalcDate: ' + ${d.getStCalcDate()}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td th:text="'idIndexLevelName: ' + ${d.getIdIndexLevelName()}"></td>
+                                                <td th:text="'stIndexLevelName: ' + ${d.getStIndexLevelName()}"></td>
+                                                <td th:text="'stSourceDataDate: ' + ${d.getStSourceDataDate()}"></td>
+                                            </tr>
+                                            <tr>
+                                                <td th:text="'stIndexStatus: ' + ${d.getStIndexStatus()}"></td>
+                                                <td th:text="'stIndexCrParam:' + ${d.getStIndexCrParam()}"></td>
+                                            </tr>
+                                            <tr th:each="e : ${d.getIndeksModels()}">
+                                                <td th:text="${e.getName()}"></td>
+                                                <td th:text="'getCalcDate: ' + ${e.getCalcDate()}"></td>
+                                                <td th:text="'id: ' + ${e.getId()}"></td>
+                                                <td th:text="'indexLevelName: ' + ${e.getIndexLevelName()}"></td>
+                                                <td th:text="'sourceDataDate: ' + ${e.getSourceDataDate()}"></td>
+
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr><br></tr>
+            </tbody>
+        </table>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>
