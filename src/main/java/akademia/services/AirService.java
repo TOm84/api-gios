@@ -28,13 +28,10 @@ public class AirService {
 
   public AirModel mapAirApiResponse() {
     String url = "http://api.gios.gov.pl/pjp-api/rest/station/sensors/837";
-//    HttpResponse response = connectionUtils.getHttpResponse(url);
-//    String responseBody = connectionUtils.getBodyFromResponse(response);
     String resp = connectionUtils.getBodyWithHttpResponse(url);
     AirModel airModel;
     try {
       JsonNode jsonNode = new ObjectMapper().readTree(resp);
-//      JsonNode jsonNode = new ObjectMapper().readTree(responseBody);
       airModel = new AirModel();
       airModel.setStationId(jsonNode.get(0).get("stationId").asInt());
       airModel.setNo2(jsonNode.get(0).get("param").get("idParam").asInt());
@@ -172,34 +169,13 @@ public class AirService {
         indeksModel.setSourceDataDate(jsonNode.get("o3SourceDataDate").toString());
         newListModel.add(indeksModel);
       }
-
       qualityModel.setIndeksModels(newListModel);
-      
-//      private String name;
-//      private String CalcDate; //Data wykonania obliczeń indeksu dla wskaźnika SO2
-//      private Integer Id; //jak wyżej, zakresy indeksu o id od  -1 do 5 lub null jeśli na stacji nie są wykonywane pomiary danego zanieczyszczenia
-//      private String IndexLevelName; //nazwa kategorii indeksu
-//      private String SourceDataDate;
-
-//      private Integer stationId; // numer id stacji pomiarowej
-//      private String stCalcDate; //data wykonania obliczeń indeksu
-//      private Integer idIndexLevelName; //wartość indeksu dla stacji wyrażona w postaci liczby -1 – Brak indeksu, 0 – Bardzo dobry, 1 – Dobry, 2 – Umiarkowany, 3 - Dostateczny, 4 – Zły, 5 – Bardzo zły
-//      private String stIndexLevelName; // jak wyżej – nazwa kategorii indeksu
-//      private String stSourceDataDate; //data danych źródłowych, z których policzono wartość indeksu
-//
-//      private Boolean stIndexStatus; //Status indeksu ogólnego dla stacji pomiarowej. Może przyjmować wartość „true” (indeks ważny) lub „false” (indeks nieważny/ brak indeksu)
-//      private String stIndexCrParam; //
-//
-//      private List<IndeksModel> indeksModels;
-
     } catch (JsonProcessingException e) {
       e.printStackTrace();
       System.err.println(e.getMessage());
       return null;
     }
-
     return qualityModel;
-
   }
 
 }

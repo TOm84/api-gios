@@ -20,7 +20,7 @@
         <table class="table-sm table-bordered table-striped table-responsive-sm w-100" th:each="c : ${allstat}">
             <tbody>
             <tr>
-                <td text="aaaa">Id station:</td>
+                <td text>Id station:</td>
                 <td th:text="${c.getStationId()}"></td>
                 <td text>Name station: </td>
                 <td th:text="${c.getStationName()}"></td>
@@ -51,7 +51,7 @@
                 <td colspan="5" th:text="${c.getAddressStreetStation()}"></td>
                 <td>
                     <div>
-                        <input hidden name="idStation" th:value="${c.getStationId()}">
+                        <input hidden name="idStation" th:action="${'/allstation'}" th:value="${c.getStationId()}">
                         <button type="button" class="btn btn-success open-button btn-sm pt-0 pb-0" data-toggle="modal" data-target="#infoModal2" th:value="${c.getStationId()}" th:attrappend="data-target=${c.getStationId()}">
                             Air Quality
                         </button>
