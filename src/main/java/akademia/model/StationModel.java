@@ -1,7 +1,5 @@
 package akademia.model;
 
-import java.util.List;
-
 public class StationModel {
 
   private Integer stationId;

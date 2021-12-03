@@ -89,15 +89,34 @@ public class AirService {
         stationModel.setProvinceName(jsonNode.get(i).get("city").get("commune").get("provinceName").toString());
         stationModel.setAddressStreetStation(jsonNode.get(i).get("addressStreet").toString());
         outputList.add(stationModel);
-
       }
-
     } catch (JsonProcessingException e) {
       e.printStackTrace();
       System.err.println(e.getMessage());
       return null;
     }
+    return outputList;
+  }
 
+  public List<StationModel> stationByCity (String city) {
+    List<StationModel> allstat = allStation();
+    List<StationModel> outputList = new ArrayList<StationModel>();
+    for (StationModel st : allstat) {
+      if (st.getCityName().equalsIgnoreCase("\""+ city + "\"")) {
+        outputList.add(st);
+      }
+    }
+    return outputList;
+  }
+
+  public List<StationModel> stationByProvince (String province) {
+    List<StationModel> allstat = allStation();
+    List<StationModel> outputList = new ArrayList<StationModel>();
+    for (StationModel st : allstat) {
+      if (st.getProvinceName().equalsIgnoreCase("\""+ province + "\"")) {
+        outputList.add(st);
+      }
+    }
     return outputList;
   }
 

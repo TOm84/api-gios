@@ -16,7 +16,9 @@ public class HomeController {
 
   @GetMapping("/")
   public String getHomePage(Model model) {
-    model.addAttribute("hashList", airService.stationName());
+//    model.addAttribute("hashList", airService.stationName());
+//    model.addAttribute("bycity", airService.stationByCity("warszawa"));
+    model.addAttribute("byprovince", airService.stationByProvince("wielkopolskie"));
     return "index";
   }
 
@@ -27,7 +29,6 @@ public class HomeController {
     model.addAttribute("allstat", airService.allStation());
     if (id!=null) {
       model.addAttribute("qualitystation", airService.qualityModels(id));
-      //TODO i tutaj jest błąd. id wali nullem. Gdzieś w HTML błąd, że c.getCityId() nie zostaje przypisane do idStation ;(
     }
     return "allstation";
   }
@@ -46,5 +47,4 @@ public class HomeController {
     model.addAttribute("stationNameList", airService.stationName());
     return "airquality";
   }
-
 }
