@@ -16,6 +16,26 @@
             <nav th:replace="navibar :: navib"></nav>
         </div>
     </div>
+    <br>
+    <div class="row mt-2">
+        <div class="col-6">
+            <form>
+                <label>Search all station in city: </label>
+                <input id="city" name="city">
+                <button type="submit" class="btn btn-outline-dark btn-sm">Search</button>
+            </form>
+
+        </div>
+        <div class="col-6">
+            <form>
+                <label>Search all station in province: </label>
+                <input id="province" name="province">
+                <button type="submit" class="btn btn-outline-dark btn-sm">Search</button>
+            </form>
+
+        </div>
+
+    </div>
     <div id="search2" th:action="${'/allstation'}">
         <table class="table-sm table-bordered table-striped table-responsive-sm w-100" th:each="c : ${allstat}">
             <tbody>

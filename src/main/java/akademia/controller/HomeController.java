@@ -24,11 +24,15 @@ public class HomeController {
 
   @GetMapping("allstation")
   public String allStationPage (
-      @RequestParam(value = "idStation", required = false) Integer id,
+      @RequestParam(value = "city", required = false) String city,
+      @RequestParam(value = "province", required = false) String province,
       Model model) {
-    model.addAttribute("allstat", airService.allStation());
-    if (id!=null) {
-      model.addAttribute("qualitystation", airService.qualityModels(id));
+    if (city!=null) {
+      model.addAttribute("allstat", airService.stationByCity(city));
+    } else if (province!=null) {
+      model.addAttribute("allstat", airService.stationByProvince(province));
+    } else {
+      model.addAttribute("allstat", airService.allStation());
     }
     return "allstation";
   }
