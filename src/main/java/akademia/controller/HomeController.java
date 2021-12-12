@@ -17,6 +17,7 @@ public class HomeController {
   @GetMapping("/")
   public String getHomePage(Model model) {
 //    model.addAttribute("hashList", airService.stationName());
+    model.addAttribute("hashList", airService.stationCoordinate());
 //    model.addAttribute("bycity", airService.stationByCity("warszawa"));
     model.addAttribute("byprovince", airService.stationByProvince("wielkopolskie"));
     return "index";
@@ -50,5 +51,18 @@ public class HomeController {
     }
     model.addAttribute("stationNameList", airService.stationName());
     return "airquality";
+  }
+
+  @GetMapping("stationmap")
+  public String stationMapPage(
+      @RequestParam(value = "nameStation", required = false) String nameStation,
+      @RequestParam(value = "coord", required = false) String coord,
+      Model model
+  ) {
+    model.addAttribute("coordinateStationList", airService.stationCoordinate());
+    model.addAttribute("coordinate", nameStation);
+    model.addAttribute("coordinate", airService.trim(coord));
+
+    return "stationmap";
   }
 }

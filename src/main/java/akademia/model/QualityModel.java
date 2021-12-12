@@ -3,14 +3,14 @@ package akademia.model;
 import java.util.List;
 
 public class QualityModel {
-  private Integer stationId; // numer id stacji pomiarowej
-  private String stCalcDate; //data wykonania obliczeń indeksu
-  private Integer idIndexLevelName; //wartość indeksu dla stacji wyrażona w postaci liczby -1 – Brak indeksu, 0 – Bardzo dobry, 1 – Dobry, 2 – Umiarkowany, 3 - Dostateczny, 4 – Zły, 5 – Bardzo zły
-  private String stIndexLevelName; // jak wyżej – nazwa kategorii indeksu
-  private String stSourceDataDate; //data danych źródłowych, z których policzono wartość indeksu
+  private Integer stationId;
+  private String stCalcDate;
+  private Integer idIndexLevelName;
+  private String stIndexLevelName;
+  private String stSourceDataDate;
 
-  private Boolean stIndexStatus; //Status indeksu ogólnego dla stacji pomiarowej. Może przyjmować wartość „true” (indeks ważny) lub „false” (indeks nieważny/ brak indeksu)
-  private String stIndexCrParam; //
+  private Boolean stIndexStatus;
+  private String stIndexCrParam;
 
   private List<IndeksModel> indeksModels;
 

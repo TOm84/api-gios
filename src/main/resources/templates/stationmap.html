@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en" xmlns:w="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row mt-2">
+        <div class="col-12">
+            <nav th:replace="navibar :: navib"></nav>
+        </div>
+    </div>
+    <br>
+    <form th:action="${'stationmap'}" method="get">
+        <label th:field="coin1">Chosing station by name: </label>
+        <select id="nameStation" name="nameStation">
+            <option value="">Station list</option>
+            <option th:each="gs : ${coordinateStationList.keySet()}" th:value="${coordinateStationList.get(gs)}" th:text="${gs}"/>
+        </select>
+        <button type="submit" class="btn btn-outline-dark btn-sm">Szukaj</button>
+    </form>
+
+    <div style="overflow:hidden;width: 700px;position: relative;">
+        <iframe width="700" height="440" th:src="'https://maps.google.com/maps?width=700&amp;height=440&amp;hl=en&amp;q=' + ${coordinate}+'(Tytu%C5%82)&amp;ie=UTF8&amp;t=k&amp;z=21&amp;iwloc=B&amp;output=embed'" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        <div style="position: absolute;width: 80%;bottom: 10px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;">
+            <small style="line-height: 1.8;font-size: 2px;background: #fff;">Powered by
+                <a href="https://embedgooglemaps.com/en/">embedgooglemaps EN</a> & <a href="https://playfreeslots.org/">play
+                    free</a></small></div>
+        <style>#gmap_canvas img {
+            max-width: none !important;
+            background: none !important
+        }</style>
+    </div>
+    <br/>
+</div>
+
+</body>
+</html>
+</body>
+</html>

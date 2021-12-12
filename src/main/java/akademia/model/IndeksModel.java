@@ -2,9 +2,9 @@ package akademia.model;
 
 public class IndeksModel {
   private String name;
-  private String CalcDate; //Data wykonania obliczeń indeksu dla wskaźnika SO2
-  private Integer Id; //jak wyżej, zakresy indeksu o id od  -1 do 5 lub null jeśli na stacji nie są wykonywane pomiary danego zanieczyszczenia
-  private String IndexLevelName; //nazwa kategorii indeksu
+  private String CalcDate;
+  private Integer Id;
+  private String IndexLevelName;
   private String SourceDataDate;
 
   public IndeksModel(String name, String calcDate, Integer id, String indexLevelName, String sourceDataDate) {

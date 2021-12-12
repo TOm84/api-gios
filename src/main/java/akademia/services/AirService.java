@@ -48,23 +48,47 @@ public class AirService {
   public TreeMap<String, Integer> stationName() {
     String url = "http://api.gios.gov.pl/pjp-api/rest/station/findAll";
     String resp = connectionUtils.getBodyWithHttpResponse(url);
-
     TreeMap<String, Integer> outputList= new TreeMap<String, Integer>();
     try {
       JsonNode jsonNode = new ObjectMapper().readTree(resp);
-
       for (Integer i = 0; i <=jsonNode.size()-1 ; i++) {
         outputList.put(jsonNode.get(i).get("stationName").toString(),jsonNode.get(i).get("id").asInt());
       }
-
     } catch (JsonProcessingException e) {
       e.printStackTrace();
       System.err.println(e.getMessage());
       return null;
     }
     outputList.values().stream().sorted();
-
     return outputList;
+  }
+  public TreeMap<String, String> stationCoordinate() {
+    String url = "http://api.gios.gov.pl/pjp-api/rest/station/findAll";
+    String resp = connectionUtils.getBodyWithHttpResponse(url);
+    TreeMap<String, String> outputList= new TreeMap<String, String>();
+    try {
+      JsonNode jsonNode = new ObjectMapper().readTree(resp);
+      for (Integer i = 0; i <=jsonNode.size()-1 ; i++) {
+        outputList.put(jsonNode.get(i).get("stationName").toString(),
+            trim(jsonNode.get(i).get("gegrLat").toString()) + "%20" + trim(jsonNode.get(i).get("gegrLon").toString()));
+      }
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+      System.err.println(e.getMessage());
+      return null;
+    }
+    outputList.values().stream().sorted();
+    return outputList;
+  }
+
+  public String trim(String string) {
+    String outputString;
+
+    outputString = string.replace("\"", "");
+
+//    outputString = string.substring(1, string.length()-1);
+
+    return outputString;
   }
 
   public List<StationModel> allStation() {

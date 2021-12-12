@@ -49,9 +49,12 @@
                 <td text>Geogr. longitude</td>
                 <td th:text="${c.getGegrLon()}"></td>
                 <td>
-                    <button>
-                        Station on the map
-                    </button>
+                    <form action="/stationmap" method="get">
+                        <input hidden name="coord" th:value="${c.getGegrLat()} + '%20' +${c.getGegrLon()}">
+                        <button type="submit">
+                            Station on the map
+                        </button>
+                    </form>
                 </td>
             </tr>
             <tr>
