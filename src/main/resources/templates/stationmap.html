@@ -21,7 +21,7 @@
     <br>
     <form th:action="${'stationmap'}" method="get">
         <label th:field="coin1">Chosing station by name: </label>
-        <select id="nameStation" name="nameStation">
+        <select id="coord" name="coord">
             <option value="">Station list</option>
             <option th:each="gs : ${coordinateStationList.keySet()}" th:value="${coordinateStationList.get(gs)}" th:text="${gs}"/>
         </select>

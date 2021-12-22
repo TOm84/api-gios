@@ -55,13 +55,15 @@ public class HomeController {
 
   @GetMapping("stationmap")
   public String stationMapPage(
-      @RequestParam(value = "nameStation", required = false) String nameStation,
-      @RequestParam(value = "coord", required = false) String coord,
+      @RequestParam(value = "coord", defaultValue = "", required = false) String coord,
       Model model
   ) {
     model.addAttribute("coordinateStationList", airService.stationCoordinate());
-    model.addAttribute("coordinate", nameStation);
-    model.addAttribute("coordinate", airService.trim(coord));
+    if (!coord.isEmpty()) {
+      model.addAttribute("coordinate", airService.trim(coord));
+    } else {
+      model.addAttribute("coordinate", "");
+    }
 
     return "stationmap";
   }
